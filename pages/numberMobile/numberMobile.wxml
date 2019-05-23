@@ -1,0 +1,8 @@
+<!--pages/numberMobile/numberMobile.wxml-->
+<view>
+  <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取手机号码</button>
+  <button open-type="getUserInfo" bindgetuserinfo="getUserInfo">获取用户信息</button>
+</view>
+<form bindsubmit="formSubmit" report-submit="true">
+  <button form-type='submit'>formId</button>
+</form>
