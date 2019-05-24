@@ -25,8 +25,8 @@ server.on("request", (req, res) => {
       //请求体参数转换为js对象
 			const { code, iv, encryptedData } = querystring.parse(body)
 			//appId和appSecret可以在微信公众平台获取,小程序appId需要和公众平台保持一致
-			const appId = '替换为你的appid'
-			const appSecret = '替换为你的appSecret'
+			const appId = '你的appId'
+			const appSecret = '你的appSecret'
 
 			//使用appid,appSecret,code和grant_type换取session
 			request(

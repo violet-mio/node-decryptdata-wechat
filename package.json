@@ -1,0 +1,23 @@
+{
+  "name": "node_dedata_wechat",
+  "version": "1.0.0",
+  "description": "node server decrypt wechat data",
+  "main": "WXBizDataCrypt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LastStartDust/node-decryptdata-wechat.git"
+  },
+  "author": "laststartdust",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LastStartDust/node-decryptdata-wechat/issues"
+  },
+  "homepage": "https://github.com/LastStartDust/node-decryptdata-wechat#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
