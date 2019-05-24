@@ -23,50 +23,50 @@ server.on("request", (req, res) => {
     //接收完毕数据触发
     req.on("end", () => {
       //请求体参数转换为js对象
-			const { code, iv, encryptedData } = querystring.parse(body)
-			//appId和appSecret可以在微信公众平台获取,小程序appId需要和公众平台保持一致
-			const appId = '你的appId'
-			const appSecret = '你的appSecret'
+      const { code, iv, encryptedData } = querystring.parse(body)
+      //appId和appSecret可以在微信公众平台获取,小程序appId需要和公众平台保持一致
+      const appId = '你的appId'
+      const appSecret = '你的appSecret'
 
-			//使用appid,appSecret,code和grant_type换取session
-			request(
+      //使用appid,appSecret,code和grant_type换取session
+      request(
         "https://api.weixin.qq.com/sns/jscode2session?appid=" +
-				appId +
-          "&secret=" +
-          appSecret +
-          "&js_code=" +
-          code +
-          "&grant_type=authorization_code",
-        function(error, response, body) {
+        appId +
+        "&secret=" +
+        appSecret +
+        "&js_code=" +
+        code +
+        "&grant_type=authorization_code",
+        function (error, response, body) {
           if (!error && response.statusCode == 200) {
-						//取出session_key
-						const sessionKey = JSON.parse(body).session_key
-						
-						const pc = new WXBizDataCrypt(appId, sessionKey)
-						//解密已加密数据
-						const deData = pc.decryptData(encryptedData , iv)
+            //取出session_key
+            const sessionKey = JSON.parse(body).session_key
+
+            const pc = new WXBizDataCrypt(appId, sessionKey)
+            //解密已加密数据
+            const deData = pc.decryptData(encryptedData, iv)
             //3 监听请求的end事件,浏览器发送数据完毕,做其他处理
             res.setHeader(
               "Content-Type",
               "application/json;charset=utf-8"
-						)
-						console.log(deData)
-						const result = {
-							code: 200,
-							msg: '解密成功',
-							data: deData
-						}
+            )
+            console.log(deData)
+            const result = {
+              code: 200,
+              msg: '解密成功',
+              data: deData
+            }
             res.end(JSON.stringify(result))
           }
         }
       )
-		})
+    })
 
-	} else {
-		res.setHeader("Content-Type", "application/json;charset=utf-8")
-		// end方法能接受的参数是二进制数据和字符串
-		res.end(JSON.stringify(""))
-	}
+  } else {
+    res.setHeader("Content-Type", "application/json;charset=utf-8")
+    // end方法能接受的参数是二进制数据和字符串
+    res.end(JSON.stringify(""))
+  }
 })
 
 //4 开启服务
